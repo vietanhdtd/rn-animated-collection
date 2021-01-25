@@ -35,7 +35,7 @@ const App = () => {
   const scrollY = useRef(new Animated.Value(0)).current
 
   const topEdge =
-    bottomActions?.y - height + bottomActions?.height + 46.5 + headerHeight
+    bottomActions?.y - height + bottomActions?.height + headerHeight
 
   const inputRange = [-1, 0, topEdge - 50, topEdge, topEdge + 1]
 
