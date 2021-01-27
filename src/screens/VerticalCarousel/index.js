@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('screen')
 const ITEM_WIDTH = width
 const ITEM_HEIGHT = height * 0.75
 const DOT_SIZE = 8
-const DOT_SPACING = 24
+const DOT_SPACING = 16
 const DOT_INDOCATOR_SIZE = DOT_SIZE + DOT_SPACING
 
 const images = [
@@ -38,6 +38,7 @@ const product = {
 
 export default function VerticalCarousel() {
   const scrollY = useRef(new Animated.Value(0)).current
+
   const renderItem = ({ item }) => {
     return (
       <View>
@@ -69,33 +70,25 @@ export default function VerticalCarousel() {
         />
         <View style={styles.pagination}>
           {images.map((_, index) => {
-            return <View key={index} style={styles.dot} />
-          })}
-          <Animated.View
-            style={[
-              styles.dotIndicator,
-              {
-                height: Animated.divide(scrollY, ITEM_HEIGHT).interpolate({
-                  easing: Easing.ease,
-                  inputRange: [0, 0.1, 0.3, 1],
-                  outputRange: [DOT_SIZE, DOT_SPACING, DOT_SPACING, DOT_SIZE],
-                }),
-              },
-              {
-                transform: [
+            return (
+              <Animated.View
+                key={index}
+                style={[
+                  styles.dot,
                   {
-                    translateY: Animated.divide(
-                      scrollY,
-                      ITEM_HEIGHT,
-                    ).interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0, DOT_INDOCATOR_SIZE],
+                    backgroundColor: scrollY.interpolate({
+                      inputRange: [
+                        ITEM_HEIGHT * (index - 1),
+                        ITEM_HEIGHT * index,
+                        ITEM_HEIGHT * (index + 1),
+                      ],
+                      outputRange: ['transparent', 'black', 'transparent'],
                     }),
                   },
-                ],
-              },
-            ]}
-          />
+                ]}
+              />
+            )
+          })}
         </View>
       </View>
       <BottomSheet
@@ -164,22 +157,3 @@ const styles = StyleSheet.create({
     // left: -DOT_SIZE / 2,
   },
 })
-
-{
-  /* <Animated.View
-key={index}
-style={[
-  styles.dot,
-  {
-    backgroundColor: scrollY.interpolate({
-      inputRange: [
-        ITEM_HEIGHT * (index - 1),
-        ITEM_HEIGHT * index,
-        ITEM_HEIGHT * (index + 1),
-      ],
-      outputRange: ['transparent', 'black', 'transparent'],
-    }),
-  },
-]}
-/> */
-}

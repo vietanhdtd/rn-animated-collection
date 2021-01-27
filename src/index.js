@@ -1,6 +1,12 @@
 import React from 'react'
 import 'react-native-gesture-handler'
-import { StickyToolBar, Home, DynamicTabs, VerticalCarousel } from 'screens'
+import {
+  StickyToolBar,
+  Home,
+  DynamicTabs,
+  VerticalCarousel,
+  BlurCarousel,
+} from 'screens'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -28,6 +34,11 @@ const App = () => {
           options={options}
           name="VerticalCarousel"
           component={VerticalCarousel}
+        />
+        <Stack.Screen
+          options={options}
+          name="BlurCarousel"
+          component={BlurCarousel}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,7 +1,12 @@
 import React from 'react'
 import { Text, View, StyleSheet, FlatList, Button } from 'react-native'
 
-const listScreens = ['StickyToolBar', 'DynamicTabs', 'VerticalCarousel']
+const listScreens = [
+  'StickyToolBar',
+  'DynamicTabs',
+  'VerticalCarousel',
+  'BlurCarousel',
+]
 
 const Home = ({ navigation }) => {
   const title = 'home'
